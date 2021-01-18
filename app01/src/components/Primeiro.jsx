@@ -1,10 +1,18 @@
 import React from 'react';
 
 
-function Primeito(){
-    return (
-        <h3>Hello World</h3>
-    );
-}
+export default () => 
+    <>
+       <h3>Primeiro</h3>
+       <h4>Exemplo de componente em react - ok</h4> 
+    </>
+// function Primeito(){
+//     return (
+//         <div>
+//             <h3>Primeiro</h3>
+//             <h4>Exemplo de componente em react</h4>
+//         </div>
+//     );
+// }
 
-export default Primeito
+// export default Primeito
