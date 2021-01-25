@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default props => {
+const filhos = props => {
     return (
         <div>
             <h2>Os Filhos</h2>
@@ -12,4 +12,4 @@ export default props => {
     );
 }
 
-
+export default filhos

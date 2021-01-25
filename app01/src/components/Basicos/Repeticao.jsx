@@ -1,7 +1,7 @@
 import React from 'react';
-import Produtos from '../data/produts';
+import Produtos from '../../data/produts';
 
-export default props => {
+const rep = props => {
     function getProdutosListItem(){
         return Produtos.map( prod => {
             return <li key={prod.id}>{prod.id} - {prod.name} - R$ {prod.price}</li>
@@ -16,3 +16,6 @@ export default props => {
         </div>
     );
 }
+
+
+export default rep
