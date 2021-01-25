@@ -6,7 +6,7 @@ const filhos = props => {
     return (
         <div>
             <div>
-              <Filho sobrenome="silva">João </Filho>
+              <Filho>João {props.sobrenome}</Filho>
               <Filho sobrenome="silva">Maria </Filho>
               <Filho sobrenome="silva">Pedro </Filho>
             </div>
