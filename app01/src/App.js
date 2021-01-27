@@ -9,16 +9,31 @@ import CondicionalComIf from './components/Basicos/CondicionalComIf';
 import Pai from './components/Comunicacao/direta/Pai';
 import Super from './components/Comunicacao/Indireta/Super';
 import Inp from './components/form/input';
+import Contador from './components/contador/Contador';
+import Cont from './components/contador/Cont';
+import Mega from './components/Mega/mega';
 
 function App() {
   return (
     <div className="App">
 
-      <Card titulo="Trabalhando com campo input">
+      <Card titulo="Contador Mega Sena" color="#008B8B">
+        <Mega qtddeNumeros={6} />
+      </Card>
+
+      <Card titulo="Contador dividido em partes" color="#8B008B">
+        <Cont />
+      </Card>
+
+      <Card titulo="Contador" color="#FF8247">
+        <Contador />
+      </Card>
+
+      <Card titulo="Trabalhando com campo input" color="#836FFF">
         <Inp />
       </Card>
 
-      <Card titulo="Comunicação Indireta">
+      <Card titulo="Comunicação Indireta" color="#FF8247">
         <Super />
       </Card>
 

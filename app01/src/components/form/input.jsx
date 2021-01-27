@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 
 const Form = props => {
+    const [nome, setNome ] = useState('Nome:');
     return (
         <div>
-            <input type="text" value={null} />
+            <h3>{nome}</h3>
+            <input type="text" value={nome}
+                onChange={e => setNome(e.target.value) } />
         </div>
     );
 }
