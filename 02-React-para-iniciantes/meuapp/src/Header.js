@@ -1,0 +1,22 @@
+import React from 'react'
+
+const Header = () => {
+  return (
+    <header>
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/produtos">Produtos</a>
+        </li>
+        <li>
+          <a href="/exemplos">Exemplos</a>
+        </li>
+      </ul>
+    </header>
+  )
+}
+
+
+export default Header;
