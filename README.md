@@ -36,7 +36,7 @@ const [from, setForm] = React.useState({
     email: '',
 })
 ```
-### EXERCÍCIO
+### EXERCÍCIO 01
 > | Componente : Exercicio01
 * Faça um fetch (post) para a API abaixo
 * Para a criação ser aceita é necessário enviar dados de: nome, email, senha, cep, rua, bairro, cidade e estado.
@@ -56,4 +56,35 @@ fetch('https://ranekapi.origamid.dev/json/api/usuario', {
 ### TEXTAREA
 > | Componente : Textarea
 - no React o **textarea** é utilizado como um input, uma tag única sem abertura/fechamento e com o value para definir o seu valor interno.
+
+
+### SELECT
+> | Componente : Selecte
+- O **value** e **onChange** são definidos no select. Para definir um valor inicial, coloque o mesmo no **useState**.
+
+### RADIO
+> | Componente : Radio
+- No radio comparamos o valor selecionado com o valor do input, dentro do atributo checked. O que retornar true irá marcar o botão.
+
+### CHECKBOB
+> | Componente : Checkboxx
+- O estado do checkbox está relacionado ao **checked**
+
+### EXERCÍCIO 02
+> | Componente : Exercicio02
+- Otimizar o código do slide anterior
+- Utilizando o array abaixo para mostrar cada checkbox na tela
+```
+const coresArray = ['Azul','Roxo','Laranja','Verde','Vermelho'];
+```
+
+### COMPONENTE INPUT
+> | Componente : CompInput
+- Podemos definir um componente para cada tipo de campo de formulário, assim evitamos criar código repetido.
+
+### COMPONENTE SELECT
+> | Componente : CompSelect
+
+### COMPONENTE RADIO
+> | Componente : CompRadio
 
