@@ -1,22 +1,26 @@
 import React from 'react'
 
-const CompRadio = ({ options, value, setValue}) => {
+const CompRadio = ({ options, value, setValue, ...props}) => {
+
+  console.log(value);
+
   return (
-    <>
-      {
-      options.map( (op) => (
-        <label key={op} >
+    <div>
+      { options.map( (option) => (
+        <label key={option} >
           <input
             type="radio"
-            value={op}
-            checked={value === op}
-            onChange={ ({target}) => setValue(target.value)}
+            value={option}
+            checked={value === option}
+            onChange={ ({ target }) => setValue(target.value)}
+            {...props}
           />
-          {op}
+          
+          {option}
         </label>
-      ))
-    }
-    </>
+      ))}
+    </div>
+  
   )
 }
 

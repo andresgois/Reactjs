@@ -10,6 +10,40 @@
         - yarn start
     - |
 
+## APPLICATION THREE
+### HOOKS
+##### ESTADO
+    -  O estado de uma plicação representa as características dela naquela momento. Por exemplo: os dados do usuário foram carregados, o botão está ativo, o usuário está na página de contato e etc.
+
+##### Hooks
+> | Componente : Btn
+    - Os **Hooks** são funções especiais do React que permitem controlarmos o estado e o ciclo de vida de componentes funcionais, Isso antes só era possível com classes.
+```
+const [ ativo, setAtivo ] = React.useState(false);
+
+function handleClick(){
+    setAtivo(!ativo);
+}
+
+<button onClick={handleClick}>
+    {ativo ? 'Ativo' : 'Inativo'}
+</button>
+```
+##### Props
+> | Componente : Btn
+    - Podemos passar o estado e a função de modificação como propriedades para outros elementos.
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## APPLICATION FOUR
 ### INPUT
@@ -66,7 +100,7 @@ fetch('https://ranekapi.origamid.dev/json/api/usuario', {
 > | Componente : Radio
 - No radio comparamos o valor selecionado com o valor do input, dentro do atributo checked. O que retornar true irá marcar o botão.
 
-### CHECKBOB
+### CHECKBOX
 > | Componente : Checkboxx
 - O estado do checkbox está relacionado ao **checked**
 
@@ -87,4 +121,17 @@ const coresArray = ['Azul','Roxo','Laranja','Verde','Vermelho'];
 
 ### COMPONENTE RADIO
 > | Componente : CompRadio
+
+### COMPONENTE CHECKBOX
+> | Componente : CompCheck
+
+### COMPONENTE ONBLUR
+> | Componente : Onblur
+- O **onBlur** é ativado sempre que o campo fica fora de foco, momento perfeito para validarmos o dado do campo. A validação pode ser feita com Javascript utilizando REGEX.
+
+
+### COMPONENTE USERFORM
+> | Componente : UserForm
+- Podemos definir um custom hook para formulários.
+
 
