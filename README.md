@@ -4,7 +4,7 @@
     > | baseia-se na capacidade de uma variável avisar que foi mudada. Contruindo uma cadeia de reações, um fluxo no código, é possível que mudando uma variável a mudança se propague tornando a aplicação reactiva
 ## COMANDOS
     - | Fundamentos React
-        - npm install -g create-react-app
+        - npm install create-react-app
         - npx create-react-app nome_app
         - cd meu-app-react
         - yarn start
@@ -32,6 +32,117 @@ function handleClick(){
 ##### Props
 > | Componente : Btn
     - Podemos passar o estado e a função de modificação como propriedades para outros elementos.
+
+##### REATIVIDADE
+> | Componente : Btn
+    - Não modifique o estado diretamente. Utilize sempre um função de atualização do estado, pois ela que garante a reatividade dos componentes.
+```
+const [item, setItem] = React.useState(['Item 1', 'Item 2']);
+
+function handleClick(){
+    item.push('novo item); // Errado
+}
+
+function handleClickReativo(){
+    setItem([...item], 'novo item); // Certo
+}
+```    
+
+##### EXERCICIO
+> | Componente : Renderiza
+    - Os links abaixo puxam dados de um produto em formato json
+    - https://ranekapi.origamid.dev/json/api/produto/tablet
+    - https://ranekapi.origamid.dev/json/api/produto/smartphone
+    - https://ranekapi.origamid.dev/json/api/produto/notebook
+    - Crie uma interface com 3 botões, um para cada
+    - Ao clicar no botão, faça um fetch a api e mostre os dados do produto
+    - Mostre apenas um produto por vez
+    - Mostre a mensagem carregando... enquanto o fetch é realizado
+```
+const [dados, setDados] = React.useState(null);
+const [carregando, setCarregando ] = React.useState(null);
+
+async function handleClick(event){
+    setCarregando(true);
+    const res = await fetch(
+      `https://ranekapi.origamid.dev/json/api/produto/${event.target.innerText}`,
+      );
+
+    const json = await res.json();
+    setDados(json);
+    setCarregando(false);
+  }
+
+  <button style={{ margin: '.5rem'}} onClick={handleClick}>notebook</button>
+  {carregando && <p>Carregando...</p>}
+  {!carregando && dados && <Produto dados={dados} />}
+```  
+
+##### useEffect
+> | Componente : HookEffect
+    - Todo componente possui um ciclo de vida. Os principais momentos acontecem
+    quando um componente é renderizado, atualizado ou destruído. Com o **React.useEffect()**
+    podemos definir um callback que irá ser executado durante certos momentos do ciclo de vida do componente.
+```
+React.useEffect( () => {
+    console.log('Executa uma única vez, ex: busca dados do banco');
+  }, []);
+
+React.useEffect( () => {
+    console.log('Executa todas as vezes que a variavel que esta dentro ddo cochete mudar de estado');
+  }, [variavel]);
+```    
+
+##### useRef
+> | Componente : UseRef
+    - Retorna um objeto com a propriedade **current**. Esse objeto pode ser utilizado para guardamos valores que irão persistir durante todo o ciclo de vida do elemnto. Geralmente usarmos o mesmo para nos referirmos a um elemento do DOM, sem precisarmos utilizar o **querySelector** ou similar.
+
+```
+  const [ carrinho, setCarrinho ] = React.useState(0);
+  const [ notificacao, setNotificacao ] = React.useState(null);
+  const timeOutRef = React.useRef();
+
+  function handleClick2(){
+    setCarrinho(carrinho + 1)
+    setNotificacao('Item adiconado ao carrinho')
+
+    clearTimeout(timeOutRef.current)
+    timeOutRef.current = setTimeout( () => {
+      setNotificacao(null)
+    }, 1000)
+  }
+
+``` 
+
+##### useMemo
+> | Componente : UseMemo
+    - Memoriza um valor, evitando a recriação do mesmo todas as vezes em que um componente for atualizado. Recebendo um callback e um array de dependências.
+
+##### useCallback
+> | Componente : UseCallback
+    - Permite definirmos um callback e uma lista de dependências do callback, Esse callback só será recriado se essa lista de dependências for modificada, caso contrário ele não irá recriar o callback.
+
+##### useContext
+> | Componente : UseContext
+    - createContext
+    - O contexto ira permitir passarmos dados/estado a todos os componentes, sem a necessidade de utilizar propriedades. Serve principalmente para dados/estados globais como por exemplo dados do usuário logado.
+```
+ const UseContext = React.createContext();
+```    
+> | Componente : UseContext
+    - 
+```
+return (
+    <UseContext.Provider value={{ nome: 'Andre'}}>
+      {children}
+    </UseContext.Provider>
+  )
+```
+
+
+
+
+
 
 
 
@@ -135,3 +246,68 @@ const coresArray = ['Azul','Roxo','Laranja','Verde','Vermelho'];
 - Podemos definir um custom hook para formulários.
 
 
+
+## EXTRA
+##### Configurando TailwindCSS No React
+    * npm install -D tailwindcss postcss autoprefixer onchange postcss-cli postcss-nested npm-run-all
+    * crie um diretorio dentron de src
+        - src\assets\css   
+            - tailwind.src.css
+                ```
+                @tailwind base;
+                @tailwind components;
+                @tailwind utilities;
+                ```
+            - tailwind.css
+    * npx tailwind init -p
+        - gera o file: tailwind.config.js
+    ```
+    const colors = require('tailwindcss/colors');
+
+    module.exports = {
+    purge: {
+        mode: 'layers',
+        content: ['src/**/*.js', 'src/**/*.jsx', 'src/**/*.ts', 'src/**/*.tsx', 'public/**/*.html'],
+    },
+    darkMode: false, // or 'media' or 'class'
+    theme: {
+        extend: {
+        colors:{
+            blue: colors.lightBlue,
+            gray: colors.trueGray,
+            red: colors.yellow,
+        }
+        },
+    },
+    variants: {
+        extend: {},
+    },
+    plugins: [],
+    }
+
+    ```
+    * postcss.config.js
+    ```
+    module.exports = {
+    plugins: [
+        require('tailwindcss'),
+        require('postcss-nested'),
+        require('autoprefixer'),
+    ],
+    }
+    ```
+
+    * package.json
+    ```
+    "scripts": {
+    "start": "npm-run-all start:tailwind -l -p start:p:*",
+		"start:tailwind": "postcss ./src/assets/css/tailwind.src.css -o ./src/assets/css/tailwind.css",
+		"start:p:watch-tailwind": "onchange \"tailwind.config.js\" \"src/**/*.css\" -e \"./src/assets/css/tailwind.css\" -- npm run start:tailwind",
+		"start:p:react": "react-scripts start",
+		"build": "run-s build:** -l",
+		"build:a:tailwind": "cross-env NODE_ENV=production npm run start:tailwind",
+		"build:b:react": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+    },
+    ```

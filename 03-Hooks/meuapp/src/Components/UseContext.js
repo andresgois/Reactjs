@@ -13,7 +13,10 @@ export const UserContext = ({ children }) => {
     setContar( (contar) => contar + 2);
   }
 
-  return <UseContext.Provider value={{ nome: 'Andre',contar, adicionarUm, AdicionarDois}}>
-    {children}
-  </UseContext.Provider>
+  return (
+    <UseContext.Provider value={{ nome: 'Andre',contar, adicionarUm, AdicionarDois}}>
+      {children}
+    </UseContext.Provider>
+  )
+  
 }

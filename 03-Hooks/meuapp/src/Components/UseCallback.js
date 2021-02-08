@@ -1,6 +1,6 @@
 import React from 'react'
 
-// como um array, só q recebe apenas valor unico
+// como um array, só q recebe apenas valores unicos
 const set1 = new Set();
 const set2 = new Set();
 
