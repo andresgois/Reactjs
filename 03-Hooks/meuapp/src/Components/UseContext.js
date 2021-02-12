@@ -14,7 +14,8 @@ export const UserContext = ({ children }) => {
   }
 
   return (
-    <UseContext.Provider value={{ nome: 'Andre',contar, adicionarUm, AdicionarDois}}>
+    <UseContext.Provider 
+      value={{ nome: 'Andre',contar, adicionarUm, AdicionarDois}}>
       {children}
     </UseContext.Provider>
   )

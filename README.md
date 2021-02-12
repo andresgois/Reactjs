@@ -123,14 +123,15 @@ React.useEffect( () => {
     - Permite definirmos um callback e uma lista de dependências do callback, Esse callback só será recriado se essa lista de dependências for modificada, caso contrário ele não irá recriar o callback.
 
 ##### useContext
-> | Componente : UseContext
+> | Componente : context_app
     - createContext
     - O contexto ira permitir passarmos dados/estado a todos os componentes, sem a necessidade de utilizar propriedades. Serve principalmente para dados/estados globais como por exemplo dados do usuário logado.
 ```
- const UseContext = React.createContext();
+ const UserContext = React.createContext();
+
+ export default UserContext;
 ```    
-> | Componente : UseContext
-    - 
+ 
 ```
 return (
     <UseContext.Provider value={{ nome: 'Andre'}}>
@@ -139,20 +140,13 @@ return (
   )
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+##### Exercício
+- Utilize o globalConext do exemplo anterior para puxar os dados da API abaixo:
+- https://ranekapi.origamid.dev/json/api/produto/
+- assim que o usuário acessar o app
+- coloque os dados da api no context global, dado acesso aos dados da mesma
+- defina uma função limparDados que é responsável por zerar os dados de produto
+- e exponha essa função no contexto global
 
 
 
@@ -244,6 +238,154 @@ const coresArray = ['Azul','Roxo','Laranja','Verde','Vermelho'];
 ### COMPONENTE USERFORM
 > | Componente : UserForm
 - Podemos definir um custom hook para formulários.
+
+
+
+## APPLICATION FIVE
+### CSS
+
+##### REACTIVIDADE
+> | Componente : App
+ * Import
+ - A forma mais simple de uso do CSS é importando o mesmo direto
+ no javascript. A importação é efetuada pelo webpack.
+
+ * Conflito
+ - Todos os arquivos serão unidos em um CSS final e você é
+ responsável por garantir que os seletores sejam específicos, para
+ evitar conflito.
+
+ > | Componente : Produto
+##### CSS
+ - Os modules garantem que as classes utilizada sejam sempre únicas, evitando o conflito. O modo já vem configurado com o **create-react-app**, basta definirmos o nome do arquivo css com a palavra .module. Ex: **produto.module.css**. devemos definir u nome para a importação, a mesma será transformada em um objeto que possui nomes únicos para as classes.
+
+##### camelCase
+ - Utilize camelCase **tituloPrincipal**, já que o nome da classe se transformará em uma propriedade de um objeto Javascript. Não utiliza hífens **titulo-principal**.
+
+##### Funcionalidades extras
+ - O CSS modules disponibiliza algumas funcionalidades extras para o CSS, como a definição de variávesi, composição de elementos e definição de classes no contexto global, não aconselho o uso, pois a sintaxe não é bem suportada pela IDE (VS Code) e pelo eslint. 
+ ** Não muito bom, pelas questoes acima:
+    - @value width: 900px;
+    - :global .container{ max-width: width}
+ ** Mais recomendado
+    - .preco{ --cor: '#ccc';}
+    - .titulo{ color: var(--cor); }
+
+##### Styled Components
+ - Permite escrevermos o CSS diretamente no javascript. Ao invés de classe, criamos componentes com um estilo único.
+
+ - npm install styled-components
+ - instalar plugin do vscode
+ - vscode-styled-components
+ ```
+ import styled from 'styled-components';
+
+const Btn = styled.button`
+  font-size: 2rem;
+  color: '#fff';
+  background-color: '#000';
+`
+ ```
+
+##### Frameworks CSS
+* CSS
+- Podemos adicionar qualquer library/framework de css ao React.
+- Com o @next vamos instalar a versão 5 do bootsrap. Popper é necessário para algumas funções do bootstrap.
+- npm install bootstrap@next
+- No index.js
+```
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap/dist/css/bootstrap.min.css';
+```
+
+
+##### Animações
+* Animation
+- Anime a entrada de lementos utilizando a propriedade **animation**.
+
+##### Imagens
+* Imagem
+- Podemos importar a imagem direto para o componente. O webpack irá gerar o caminho correto na build final.
+
+
+## APPLICATION SIX
+### ROTAS
+
+##### React Router DOM
+- É uma extensão que permite gerenciarmos as rotas do React. Ela é desenvolvida e mantida pela empresa React Training.
+- npm install history react-router-dom@next
+
+##### BrowserRouter, Routes e Route
+ - O **BrowserRouter** deve ser o componente pai que envolve tudo que dependa do react-router. O **Routes** define a área em que vamos colocar nossos **Route**. O **Route** recebe um caminho em **path**, se esse caminho for o mesmo do URL ele irá renderizar o component que estiver dentro de **element={}**.
+ 
+##### Link
+ - O **link** irá modificar a rota e renderizar o novo componente sem recarregar a página.
+ ```
+ import { Link } from 'react-router-dom'
+
+ <Link to="/">Home</Link>
+ ```
+
+ ##### useNavigate
+ - O hook **useNavigate** permite navegarmos programaticamente entre as rotas. Por exemplo, pode ser utilizado quando o usuário faz um login bem sucedido e mesmo á página da sua conta.
+
+##### Rota dinamica
+ - O uso de **:nome** irá definir uma rota dinâmica, onde o nome poderá ser utilizado como uma variável dentro do componente. Serve para buscarmos rotas dinâmicas como **produto/notebook** ou **produto/smartphone**.
+ - Página de rotas
+ ```
+<BrowserRouter>
+    <Routes>
+
+      <Route path="/" element={<Home />} />
+      <Route path="produto/:id" element={<Produto />} />
+
+    </Routes>
+</BrowserRouter>
+ ```
+ - Página que recebe no exemplo produtos
+ ```
+ import { useParams } from 'react-router-dom';
+
+const Produtos = () => {
+  const params = useParams();
+
+  return (
+    <div>
+      <h1>Produto: {params.id}</h1>
+    </div>
+  )
+}
+ ```
+
+##### Nested Routes
+ - Utilizamos nested routes quando precisamos de rotas dentro de rotas. Como por exemplo: **perfil/editar** e **perfil/certificados** e etc. Utilize o **\* ** para definir que existem outras rotas dentro.
+
+##### Head
+ - No React não temos acesso direto as tags e informações do Head. Porém com o uso rotas é essencial realizar a mudança di título e descrição para cada rota. Podemos fazer isso através de um componente ou custom hook.
+
+ ```
+ const Head = (props) => {
+     React.useEffect( () => {
+         document.title = props.title;
+         document
+            .querySelector("meta[name='description']")
+            .setAttribute('content', props.description);
+     }, [props]);
+
+     return <></>;
+ };
+ 
+ ```
+
+
+
+
+
+
+
+
+
+
 
 
 

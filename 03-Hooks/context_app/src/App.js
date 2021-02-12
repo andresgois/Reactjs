@@ -1,9 +1,14 @@
+import React from 'react';
+import Produto from './Produto';
+import { GlobalStorange } from './GlobalContext';
 
 function App() {
   return (
-    <div className="App">
-     <h2 className="mx-auto">Hello World</h2>
-    </div>
+    <div>
+      <GlobalStorange>
+        <Produto />
+      </GlobalStorange> 
+    </div>     
   );
 }
 
