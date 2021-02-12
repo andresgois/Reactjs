@@ -377,6 +377,14 @@ const Produtos = () => {
  
  ```
 
+ ##### Desafio de Router
+ | > desafio
+ - Utilize a API abaixo para puxar a lista de produtos
+ - https://ranekapi.origamid.dev/json/api/produto
+ - Cada produto possui um id, o mesmo pode ser passado na api para 
+ - https://ranekapi.origamid.dev/json/api/produto/notebook
+ * Dependências
+    - npm install --save history react-router-dom@next
 
 
 
