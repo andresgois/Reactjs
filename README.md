@@ -387,8 +387,46 @@ const Produtos = () => {
     - npm install --save history react-router-dom@next
 
 
+## APPLICATION SEVEN
+### PROPTYPES
 
+##### PropTypes
+> | Componente : Button
+- O PropTypes irá retornar um erro caso o valor da propriedade passada seja um tipo de dado diferente do especificado. É também possível especificar se um propriedade é obrigatório ou não. O **prop-typer** já vem instalado no create-react-app, basta importamos para utilizamos.
 
+##### Code Splitting
+> | Componente : App
+- Com o lazy e suspense podemos dividir o código da nossa aplicação. Assim o react só irá carregar certas partes do código, quando as mesmas forem necessárias.
+- No exemplo é gerado o build com o jquery sem o code splitting, quando se especifica o Splitting, para o caso do jquery em página especifica, ele só é carregado quando a página é chamada.
+
+##### React.memo
+> | Componente : Header.js
+- Retorna um componente memorizado, evitando que o mesmo seja atualizado toda vez que o estado de um elemneto pai mudar. Use apenas para elementos que não dependam de estados diferentes.
+- não usar com componentes que tenham elementos que mudem de estado dentro dele.
+- Ex: <Header contar={contar}>
+
+##### React.useReducer
+> | Componente : Redutor.js
+- O **useReducer** serve para lidarmos com estados que possuem funções fixas responsáveis por modificar o mesmo.
+- state -> Retorna estado do item
+- dispatch -> manda ações para o reduce
+
+##### extends React.Component
+> | Componente : Produtos.js
+- Antes dos hooks a única forma de criarmos componentes com estados reativos, era através da extensão da classe **React.Component**. O JSX que é renderizado pelo componente de classe deve estar dentro do retorno do método **render()**.
+- Todas as funções tem que ser faitas dentro do construtor com o BIND
+```
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick(){
+        this.setState( (state) => ({contar: state.contar + 1}))
+    }
+
+    <button onClick={this.handleClick}>Adicionar</button>
+```
 
 
 
